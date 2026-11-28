@@ -291,7 +291,7 @@
 
   <script src="script.js"></script>
   <!-- Styled Botpress AI Webchat (Instant Mount) -->
-  <link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
+<link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
 <script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
 <script>
   fetch("https://vdk-viber-runtime-prod.bot.botpress.host/edge/bots/70d89f53-04cf-438b-a3a3-a0036cdd498f/config")
@@ -300,67 +300,6 @@
       VdkEdgeWebchat.mount({ ...webchat, mode: "bubble", baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host", botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f" })
     )
 </script>
-  <script>
-    window.addEventListener("load", function () {
-      if (window.VdkEdgeWebchat) {
-        VdkEdgeWebchat.mount({
-          mode: "bubble",
-          position: "left",
-          theme: "dark",
-          color: "#9303C5",
-          radius: 2,
-          sound: true,
-          voice: true,
-          feedback: true,
-          conversationList: true,
-          uploads: true,
-          botName: "BrandMyCareer AI",
-          description: "Ask about CV packages, pricing & turnaround",
-          welcomeMessage: "Hi! I'm BrandMyCareer's AI assistant. How can I help with your CV or LinkedIn profile today?",
-          avatarUrl: "data:image/svg+xml,%3Csvg xmlns='http://w3.org' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%232A0A2B'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-weight='bold' font-size='20' fill='%23f5c542'%3EBMC%3C/text%3E%3C/svg%3E",
-          themeOverrides: {
-            "--webchat-color-surface-default": "#160418",
-            "--webchat-transcript-background": "#120314",
-            "--webchat-color-surface-subtle": "#2A0A2B",
-            "--webchat-color-surface-strong": "#3a0c3d",
-            "--webchat-color-text-default": "#F8E6F9",
-            "--webchat-color-text-muted": "#DEABE0",
-            "--webchat-color-border-default": "rgba(147, 3, 197, 0.45)",
-            "--webchat-color-border-strong": "#9303C5",
-            "--webchat-composer-background": "#2A0A2B"
-          },
-          customCss: `
-            .vdk-edge-header {
-              background: linear-gradient(135deg, #4D1250, #2A0A2B) !important;
-              border-bottom: 1px solid #9303C5 !important;
-            }
-            .vdk-edge-bot .vdk-edge-bubble {
-              background: #2A0A2B !important;
-              border: 1px solid rgba(147, 3, 197, 0.55) !important;
-              border-radius: 16px !important;
-              padding: 12px 15px !important;
-            }
-            .vdk-edge-user .vdk-edge-bubble {
-              background: linear-gradient(135deg, #9303C5, #6c0291) !important;
-              border: 1px solid #DEABE0 !important;
-            }
-            .vdk-edge-composer textarea {
-              border: none !important;
-              box-shadow: none !important;
-              background: transparent !important;
-              color: #F8E6F9 !important;
-            }
-            .vdk-edge-launcher {
-              border: 2px solid #f5c542 !important;
-              box-shadow: 0 6px 22px rgba(147, 3, 197, 0.65) !important;
-            }
-          `,
-          baseUrl: "https://botpress.host",
-          botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f"
-        });
-      }
-    });
-  </script>
 </body>
 </html>
 
