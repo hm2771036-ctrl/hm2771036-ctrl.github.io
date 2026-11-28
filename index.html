@@ -299,6 +299,71 @@
     .then(({ webchat }) =>
       VdkEdgeWebchat.mount({ ...webchat, mode: "bubble", baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host", botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f" })
     )
+
+
+  <!-- Chatbot launcher and styles -->
+<style>
+  .vdk-edge-launcher {
+    position: fixed !important;
+    left: 20px !important;
+    right: auto !important;
+    bottom: 20px !important;
+    border: 2px solid #f5c542 !important;
+    box-shadow: 0 6px 22px rgba(147, 3, 197, 0.55) !important;
+  }
+
+  .vdk-edge-header {
+    background: linear-gradient(135deg, #4d1250, #2a0a2b) !important;
+    border-bottom: 1px solid #9303c5 !important;
+  }
+
+  .vdk-edge-bot .vdk-edge-bubble {
+    background: #2a0a2b !important;
+    border: 1px solid rgba(147, 3, 197, 0.55) !important;
+    border-radius: 16px !important;
+  }
+
+  .vdk-edge-user .vdk-edge-bubble {
+    background: linear-gradient(135deg, #9303c5, #6c0291) !important;
+    border-radius: 16px !important;
+  }
+
+  @media (max-width: 600px) {
+    .vdk-edge-launcher {
+      left: 14px !important;
+      right: auto !important;
+      bottom: 14px !important;
+    }
+  }
+</style>
+
+<script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
+<script>
+  window.addEventListener("load", function () {
+    if (!window.VdkEdgeWebchat) {
+      console.error("Chatbot script could not load.");
+      return;
+    }
+
+    VdkEdgeWebchat.mount({
+      mode: "bubble",
+      position: "left",
+      theme: "dark",
+      color: "#9303C5",
+      radius: 2,
+      sound: true,
+      voice: true,
+      feedback: true,
+      conversationList: true,
+      uploads: true,
+      botName: "BrandMyCareer AI",
+      description: "Ask about CV packages, pricing and turnaround",
+      welcomeMessage: "Hi! How can I help with your CV or LinkedIn profile?",
+      baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host",
+      botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f"
+    });
+  });
+</script>
 </script>
 </body>
 </html>
