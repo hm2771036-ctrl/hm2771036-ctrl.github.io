@@ -1,7 +1,8 @@
 (function () {
   const WORKER_URL = ""; // We will paste your Cloudflare Worker URL here next!
 
-  const widgetHTML = `
+  const WORKER_URL ="https://workers.dev";
+
   <style>
     :root {
       --bmc-accent: #2563eb;
