@@ -291,8 +291,15 @@
 
   <script src="script.js"></script>
   <!-- Styled Botpress AI Webchat (Instant Mount) -->
-  <link rel="stylesheet" href="https://botpress.host" />
-  <script src="https://botpress.host"></script>
+  <link rel="stylesheet" href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css" />
+<script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
+<script>
+  fetch("https://vdk-viber-runtime-prod.bot.botpress.host/edge/bots/70d89f53-04cf-438b-a3a3-a0036cdd498f/config")
+    .then((res) => res.json())
+    .then(({ webchat }) =>
+      VdkEdgeWebchat.mount({ ...webchat, mode: "bubble", baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host", botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f" })
+    )
+</script>
   <script>
     window.addEventListener("load", function () {
       if (window.VdkEdgeWebchat) {
