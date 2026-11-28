@@ -291,82 +291,8 @@
 
   <script src="script.js"></script>
   <!-- Styled Botpress AI Webchat (Instant Mount) -->
-<link rel="stylesheet"
-      href="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css">
-
-<script src="https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js"></script>
-
-<script>
-  fetch(
-    "https://vdk-viber-runtime-prod.bot.botpress.host/edge/bots/70d89f53-04cf-438b-a3a3-a0036cdd498f/config"
-  )
-    .then((response) => {
-      if (!response.ok) throw new Error("Could not load the chatbot.");
-      return response.json();
-    })
-    .then(({ webchat }) =>
-      VdkEdgeWebchat.mount({
-        ...webchat,
-        mode: "bubble",
-        position: "left",
-        baseUrl: "https://vdk-viber-runtime-prod.bot.botpress.host",
-        botId: "70d89f53-04cf-438b-a3a3-a0036cdd498f"
-      })
-    )
-    .catch((error) => console.error(error));
-</script>
-
-<style>
-  /* Launcher */
-  .vdk-edge-launcher {
-    left: 20px !important;
-    right: auto !important;
-    bottom: 20px !important;
-    width: 58px !important;
-    height: 58px !important;
-    border: 2px solid #f5c542 !important;
-    border-radius: 50% !important;
-    box-shadow: 0 8px 24px rgba(147, 3, 197, 0.65) !important;
-  }
-
-  /* Chat header */
-  .vdk-edge-header {
-    background: linear-gradient(135deg, #4d1250, #2a0a2b) !important;
-    border-bottom: 1px solid #9303c5 !important;
-  }
-
-  /* Bot and user messages */
-  .vdk-edge-bot .vdk-edge-bubble {
-    background: #2a0a2b !important;
-    border: 1px solid rgba(147, 3, 197, 0.55) !important;
-    border-radius: 16px 16px 16px 4px !important;
-  }
-
-  .vdk-edge-user .vdk-edge-bubble {
-    background: #9303c5 !important;
-    color: #ffffff !important;
-    border-radius: 16px 16px 4px 16px !important;
-  }
-
-  /* Composer */
-  .vdk-edge-composer {
-    background: #160418 !important;
-    border-top: 1px solid rgba(147, 3, 197, 0.45) !important;
-  }
-
-  .vdk-edge-composer textarea {
-    color: #f8e6f9 !important;
-  }
-
-  @media (max-width: 600px) {
-    .vdk-edge-launcher {
-      left: 14px !important;
-      bottom: 14px !important;
-      width: 52px !important;
-      height: 52px !important;
-    }
-  }
-</style>
+<script src="chatbot.js"></script>
+    
 </body>
 </html>
 
