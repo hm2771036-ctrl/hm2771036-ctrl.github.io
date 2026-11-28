@@ -173,3 +173,127 @@
   const expandLabel = document.getElementById("bmc-expand-label");
   const searchOpt = document.getElementById("bmc-search-opt");
   
+const searchBar = document.getElementById("bmc-search-bar");
+const searchInput = document.getElementById("bmc-search-input");
+const searchClose = document.getElementById("bmc-search-close");
+const downloadOpt = document.getElementById("bmc-download-opt");
+const form = document.getElementById("bmc-form");
+const input = document.getElementById("bmc-input");
+const messages = document.getElementById("bmc-messages");
+// Live Internet Connection Monitor
+function updateConnectionStatus() {
+if (navigator.onLine) {
+statusText.textContent = "Hassan can also help";
+statusText.classList.remove("offline");
+} else {
+statusText.textContent = "Offline — No internet connection";
+statusText.classList.add("offline");
+}
+}
+window.addEventListener("online", updateConnectionStatus);
+window.addEventListener("offline", updateConnectionStatus);
+updateConnectionStatus();
+launcher.addEventListener("click", () => {
+chatWindow.classList.toggle("open");
+if (chatWindow.classList.contains("open")) input.focus();
+});
+closeBtn.addEventListener("click", () => chatWindow.classList.remove("open"));
+menuBtn.addEventListener("click", (e) => {
+e.stopPropagation();
+menuDropdown.classList.toggle("show");
+});
+document.addEventListener("click", () => menuDropdown.classList.remove("show"));
+expandOpt.addEventListener("click", () => {
+const isExpanded = chatWindow.classList.toggle("expanded");
+expandLabel.textContent = isExpanded ? "Shrink window" : "Expand window";
+});
+searchOpt.addEventListener("click", () => {
+searchBar.classList.add("show");
+searchInput.focus();
+});
+searchClose.addEventListener("click", () => {
+searchBar.classList.remove("show");
+searchInput.value = "";
+document.querySelectorAll(".bmc-msg-group").forEach(g => g.style.display = "flex");
+});
+searchInput.addEventListener("input", () => {
+const term = searchInput.value.toLowerCase();
+document.querySelectorAll(".bmc-msg-group").forEach(group => {
+const txt = group.innerText.toLowerCase();
+group.style.display = txt.includes(term) ? "flex" : "none";
+});
+});
+downloadOpt.addEventListener("click", () => {
+let lines = ["BrandMyCareer AI — Chat Transcript", "==================================", ""];
+document.querySelectorAll(".bmc-msg-group").forEach(group => {
+const sender = group.classList.contains("user") ? "You" : "BrandMyCareer AI";
+const body = group.querySelector(".bmc-msg").innerText.trim();
+lines.push([${sender}]:\n${body}\n);
+});
+const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "BrandMyCareer-Chat-Transcript.txt";
+a.click();
+});
+document.querySelectorAll(".bmc-emoji-btn").forEach(btn => {
+btn.addEventListener("click", () => {
+input.value += btn.getAttribute("data-emoji");
+input.focus();
+});
+});
+input.addEventListener("keydown", (e) => {
+if (e.key === "Enter" && !e.shiftKey) {
+e.preventDefault();
+form.dispatchEvent(new Event("submit"));
+}
+});
+function addMessage(text, sender) {
+const group = document.createElement("div");
+group.className = bmc-msg-group ${sender};
+const label = sender === "bot" ? "BrandMyCareer AI • Just now" : "You • Just now";
+group.innerHTML = <div class="bmc-msg">${text}</div><div class="bmc-meta">${label}</div>;
+messages.appendChild(group);
+messages.scrollTop = messages.scrollHeight;
+return group.querySelector(".bmc-msg");
+}
+async function handleSend(userText) {
+if (!userText.trim()) return;
+// Strictly block replies if user has no internet connection
+if (!navigator.onLine) {
+addMessage(userText.replace(/\n/g, "
+"), "user");
+input.value = "";
+addMessage("⚠️ You are currently offline. Please connect to the internet to chat with BrandMyCareer AI.", "bot");
+return;
+}
+addMessage(userText.replace(/\n/g, "
+"), "user");
+input.value = "";
+// Require live backend connection before replying
+if (!WORKER_URL) {
+addMessage("🔌 Live AI server is not connected yet. Once the backend URL is added, I will respond here.", "bot");
+return;
+}
+const botBubble = addMessage("Thinking...", "bot");
+try {
+const res = await fetch(WORKER_URL, {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ message: userText })
+});
+if (!res.ok) throw new Error("Server error");
+const data = await res.json();
+botBubble.innerHTML = data.reply || "Sorry, I couldn't get a response right now.";
+} catch (err) {
+botBubble.innerHTML = "⚠️ Unable to reach the server. Please check your internet connection and try again.";
+}
+}
+form.addEventListener("submit", (e) => {
+e.preventDefault();
+handleSend(input.value);
+});
+document.querySelectorAll(".bmc-chip").forEach((chip) => {
+chip.addEventListener("click", () => handleSend(chip.getAttribute("data-q")));
+});
+})();
